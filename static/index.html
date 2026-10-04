@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#3b5bdb">
+<title>Measurement Sheet</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📏</text></svg>">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <span class="logo">📏</span>
+      <div><h1>Measurement Sheet</h1><p>Feet.inches calculator — area &amp; volume</p></div>
+    </div>
+    <div class="top-right">
+      <span id="status" class="chip">New sheet</span>
+      <button id="theme" class="icon-btn" title="Switch theme" aria-label="Switch theme">🌓</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <main>
+    <section class="card">
+      <div class="card-head"><h2>Sheet details</h2></div>
+      <div class="details">
+        <label>Contractor<input id="d_contractor" maxlength="100"></label>
+        <label>RAB. No.<input id="d_rab_no" maxlength="60"></label>
+        <label>P.O. No.<input id="d_po_no" maxlength="60"></label>
+        <label>JMS. No.<input id="d_jms_no" maxlength="60"></label>
+        <label>Item No.<input id="d_sheet_item_no" maxlength="60"></label>
+        <label>Date<input id="d_date" type="date"></label>
+        <label class="wide">Civil Int.<input id="d_civil_int" maxlength="100"></label>
+      </div>
+      <div class="titlebar">
+        <input id="title" placeholder="Sheet name (for your saved list) — e.g. Ground floor, Mr. Sharma" maxlength="200" aria-label="Sheet name">
+        <button id="newSheet" title="Start a blank sheet">✨ New</button>
+      </div>
+      <details class="help">
+        <summary>How to type sizes</summary>
+        <ul>
+          <li>Type sizes as <b>feet.inches</b>: <code>3.6</code> = 3 ft 6 in, <code>16.5</code> = 16 ft 5 in, <code>0.8</code> = 8 in.</li>
+          <li>Fill <b>any two</b> of Length, Width, Height to get area (sq ft). Fill <b>all three</b> to get volume (cu ft).</li>
+          <li><kbd>Enter</kbd> jumps to the next box and adds a new row after the last one. <kbd>Ctrl</kbd>+<kbd>S</kbd> saves.</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Measurements <span class="count" id="countMeas"></span></h2></div>
+      <div class="grid-wrap">
+        <table class="grid">
+          <thead><tr><th class="w-no">Item No</th><th>Item name</th><th class="w-dim">Length</th><th class="w-dim">Width</th><th class="w-dim">Height</th><th class="w-qty">Qty</th><th class="w-rem">Remark</th><th class="w-res">Result</th><th class="w-act"></th></tr></thead>
+          <tbody id="meas"></tbody>
+        </table>
+      </div>
+      <button class="add" id="addMeas">＋ Add measurement</button>
+    </section>
+
+    <section class="card less-card">
+      <div class="card-head"><h2>➖ Less / Loss <span class="count" id="countLess"></span></h2></div>
+      <p class="hint">Deductions such as doors, windows or openings. They are subtracted from the gross total.</p>
+      <div class="grid-wrap">
+        <table class="grid">
+          <thead><tr><th class="w-no">Item No</th><th>Item name</th><th class="w-dim">Length</th><th class="w-dim">Width</th><th class="w-dim">Height</th><th class="w-qty">Qty</th><th class="w-rem">Remark</th><th class="w-res">Result</th><th class="w-act"></th></tr></thead>
+          <tbody id="less"></tbody>
+        </table>
+      </div>
+      <button class="add" id="addLess">＋ Add loss</button>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Totals</h2></div>
+      <div class="totals" id="totals"><span class="empty">Enter a length and width to see totals.</span></div>
+      <div class="actions">
+        <button id="saveCopy" title="Save as a new entry instead of updating">📑 Save as copy</button>
+        <button id="pdf">⬇️ PDF</button>
+        <button id="csv">⬇️ CSV (Excel)</button>
+      </div>
+    </section>
+  </main>
+
+  <aside>
+    <section class="card sticky">
+      <div class="card-head"><h2>🕘 Last 10 sheets</h2></div>
+      <p class="hint">Click a sheet to open and edit it.</p>
+      <ul class="hist" id="hist"></ul>
+    </section>
+  </aside>
+</div>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="bar-net" id="barNet"><span>Net total</span><b>–</b></div>
+    <button class="primary" id="save">💾 Save</button>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button id="toastAct" hidden></button></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
